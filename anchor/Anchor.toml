@@ -5,15 +5,23 @@ package_manager = "yarn"
 resolution = true
 skip-lint = false
 
+[programs.devnet]
+legacy_lock = "F4nMRUyScL79wXJ2TLMDgp3LfRWrQm54S2BfsRpQMw6c"
+
 [programs.localnet]
-counter = "Count3AcZucFDPSFBAeHkQ6AvttieKUkyJ8HiQGhQwe"
+legacy_lock = "F4nMRUyScL79wXJ2TLMDgp3LfRWrQm54S2BfsRpQMw6c"
 
 [registry]
-url = "https://api.apr.dev"
+url = "https://api.devnet.solana.com"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
-test = "../node_modules/.bin/jest --preset ts-jest"
+test = "../node_modules/.bin/jest  --preset ts-jest"
+
+[test]
+startup_wait = 100000
+shutdown_wait = 2000
+upgradeable = false

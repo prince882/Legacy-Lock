@@ -1,4 +1,4 @@
-import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID } from '@solana/spl-token'
+import { TOKEN_PROGRAM_ID, TOKEN_2022_PROGRAM_ID } from '@solana/spl-token'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import {
   Connection,
@@ -10,6 +10,7 @@ import {
   VersionedTransaction,
 } from '@solana/web3.js'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 export function useGetBalance({ address }: { address: PublicKey }) {
   const { connection } = useConnection()
@@ -72,20 +73,14 @@ export function useTransferSol({ address }: { address: PublicKey }) {
         // Send transaction and await for signature
         await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed')
 
-        console.log(signature)
         return signature
-      } catch (error: unknown) {
-        console.log('error', `Transaction failed! ${error}`, signature)
+      } catch {
+        toast.error("Transfer Failed")
 
         return
       }
     },
-    onSuccess: async (signature) => {
-      if (signature) {
-        // TODO: Add back Toast
-        // transactionToast(signature)
-        console.log('Transaction sent', signature)
-      }
+    onSuccess: async () => {
       await Promise.all([
         client.invalidateQueries({
           queryKey: ['get-balance', { endpoint: connection.rpcEndpoint, address }],
@@ -94,10 +89,7 @@ export function useTransferSol({ address }: { address: PublicKey }) {
           queryKey: ['get-signatures', { endpoint: connection.rpcEndpoint, address }],
         }),
       ])
-    },
-    onError: (error) => {
-      // TODO: Add Toast
-      console.error(`Transaction failed! ${error}`)
+      toast.info("Transfer Successful")
     },
   })
 }
@@ -118,10 +110,10 @@ export function useRequestAirdrop({ address }: { address: PublicKey }) {
       await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed')
       return signature
     },
-    onSuccess: async (signature) => {
+    onSuccess: async () => {
       // TODO: Add back Toast
       // transactionToast(signature)
-      console.log('Airdrop sent', signature)
+      toast.info("Airdrop Successful")
       await Promise.all([
         client.invalidateQueries({
           queryKey: ['get-balance', { endpoint: connection.rpcEndpoint, address }],
@@ -131,6 +123,9 @@ export function useRequestAirdrop({ address }: { address: PublicKey }) {
         }),
       ])
     },
+    onError: async () => {
+      toast.error("Airdrop Failed,Please Try After Some Time")
+    }
   })
 }
 

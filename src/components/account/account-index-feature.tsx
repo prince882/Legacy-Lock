@@ -11,7 +11,7 @@ export default function AccountIndexFeature() {
   }
 
   return (
-    <div className="hero py-[64px]">
+    <div className="hero py-[64px] bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.1),transparent_50%)]">
       <div className="hero-content text-center">
         <WalletButton />
       </div>

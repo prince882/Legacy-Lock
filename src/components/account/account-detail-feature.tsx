@@ -5,6 +5,7 @@ import { AccountBalance, AccountButtons, AccountTokens, AccountTransactions } fr
 import { AppHero } from '../app-hero'
 import { ellipsify } from '@/lib/utils'
 import { useParams } from 'react-router'
+import NeonTokenMintCard from '../LegacyLock/create-extras/Test-Token/Dashboard'
 
 export default function AccountDetailFeature() {
   const params = useParams() as { address: string }
@@ -23,7 +24,7 @@ export default function AccountDetailFeature() {
   }
 
   return (
-    <div>
+    <div className=''>
       <AppHero
         title={<AccountBalance address={address} />}
         subtitle={
@@ -38,7 +39,7 @@ export default function AccountDetailFeature() {
       </AppHero>
       <div className="space-y-8">
         <AccountTokens address={address} />
-        <AccountTransactions address={address} />
+        <NeonTokenMintCard/>
       </div>
     </div>
   )

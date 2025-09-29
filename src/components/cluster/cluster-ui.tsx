@@ -1,4 +1,4 @@
-import { useConnection } from '@solana/wallet-adapter-react'
+import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { useQuery } from '@tanstack/react-query'
 import * as React from 'react'
 
@@ -6,6 +6,7 @@ import { useCluster } from './cluster-data-access'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { AppAlert } from '@/components/app-alert'
+import { toast } from 'sonner'
 
 export function ExplorerLink({ path, label, className }: { path: string; label: string; className?: string }) {
   const { getExplorerUrl } = useCluster()
@@ -24,7 +25,6 @@ export function ExplorerLink({ path, label, className }: { path: string; label: 
 export function ClusterChecker({ children }: { children: React.ReactNode }) {
   const { cluster } = useCluster()
   const { connection } = useConnection()
-
   const query = useQuery({
     queryKey: ['version', { cluster, endpoint: connection.rpcEndpoint }],
     queryFn: () => connection.getVersion(),
@@ -49,16 +49,23 @@ export function ClusterChecker({ children }: { children: React.ReactNode }) {
   return children
 }
 
+export function WalletChecker({ children }: { children: React.ReactNode }) {
+  const { publicKey } = useWallet()
+  if (!publicKey) {
+    return <div>Please Connect Your Wallet</div>
+  }
+  return children
+}
 export function ClusterUiSelect() {
   const { clusters, setCluster, cluster } = useCluster()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">{cluster.name}</Button>
+        <Button variant="outline" className='text-cyan-600 font-bold text-shadow-md text-md' >{cluster.name}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {clusters.map((item) => (
-          <DropdownMenuItem key={item.name} onClick={() => setCluster(item)}>
+          <DropdownMenuItem className='font-semibold text-shadow-md text-md   ' key={item.name} onClick={() => setCluster(item)}>
             {item.name}
           </DropdownMenuItem>
         ))}

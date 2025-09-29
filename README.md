@@ -1,88 +1,36 @@
 # LegacyLock
 
-This is a Vite app containing:
+**Secure Your Crypto Assets for Your Beneficiaries**
 
-- Tailwind CSS setup for styling
-- Useful wallet UI elements setup using [@solana/web3.js](https://www.npmjs.com/package/@solana/web3.js)
-- A basic Greeter Solana program written in Anchor
-- UI components for interacting with the Greeter program using the Anchor generated client
+LegacyLock is a Solana-based decentralized application that allows users to set up **escrow-based inheritance** for their crypto assets. Users can assign beneficiaries, set check-in intervals, and ensure that if they become inactive, their assets are safely claimable by their designated beneficiaries.
 
-## Getting Started
+---
 
-### Installation
+## Features
 
-#### Download the template
+- 🛡 **Beneficiary Assignment**: Add one or multiple beneficiaries to your account.  
+- ⏱ **Interval Check-ins**: Set a check-in interval. Regular check-ins keep your assets secure.  
+- 🔓 **Automatic Escrow Expiry**: If the user hasn’t checked in after the interval, the escrow expires, and **only the beneficiary can claim the assets**.  
+- 💰 **Token Support**: Supports **SOL** and any **SPL token** (both `token` and `token-2022` programs).  
+- 📦 **Decentralized & Trustless**: Built entirely on Solana, no centralized control.
 
-```shell
-pnpm create solana-dapp@latest -t gh:solana-foundation/templates/web3js/LegacyLock
-```
+---
 
-#### Install Dependencies
+## How It Works
 
-```shell
-pnpm install
-```
+1. **Add Beneficiary**: User specifies a Solana public key to be the beneficiary.  
+2. **Set Interval**: Choose a time interval for periodic check-ins.  
+3. **Check-In**: User signs a transaction to confirm activity.  
+4. **Escrow Expiry**: If no check-in occurs before the interval ends, the escrow is marked as expired.  
+5. **Claim by Beneficiary**: Only the beneficiary can claim the assets after expiry.
 
-## Apps
+---
 
-### anchor
+## Supported Assets
 
-This is a Solana program written in Rust using the Anchor framework.
+- **Native SOL**  
+- **SPL Tokens**  
+  - Standard `token` program  
+  - `token-2022` program
 
-#### Commands
-
-You can use any normal anchor commands. Either move to the `anchor` directory and run the `anchor` command or prefix the
-command with `pnpm`, eg: `pnpm anchor`.
-
-#### Sync the program id:
-
-Running this command will create a new keypair in the `anchor/target/deploy` directory and save the address to the
-Anchor config file and update the `declare_id!` macro in the `./src/lib.rs` file of the program.
-
-You will manually need to update the constant in `anchor/lib/counter-exports.ts` to match the new program id.
-
-```shell
-pnpm anchor keys sync
-```
-
-#### Build the program:
-
-```shell
-pnpm anchor-build
-```
-
-#### Start the test validator with the program deployed:
-
-```shell
-pnpm anchor-localnet
-```
-
-#### Run the tests
-
-```shell
-pnpm anchor-test
-```
-
-#### Deploy to Devnet
-
-```shell
-pnpm anchor deploy --provider.cluster devnet
-```
-
-### web
-
-This is a React app that uses the Anchor generated client to interact with the Solana program.
-
-#### Commands
-
-Start the web app
-
-```shell
-pnpm dev
-```
-
-Build the web app
-
-```shell
-pnpm build
-```
+---
