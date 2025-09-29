@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 
 import { BN } from '@coral-xyz/anchor';
 import { Connection, PublicKey } from '@solana/web3.js';
-import { getMint, MintLayout, unpackMint } from '@solana/spl-token';
+import {  MintLayout  } from '@solana/spl-token';
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
