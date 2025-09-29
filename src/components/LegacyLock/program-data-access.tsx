@@ -135,7 +135,7 @@ export function useMutationFucntions() {
       toast.info("Initializing... Please Sign The Upcoming Transaction")
       await program.methods.createEscrowForToken(new anchor.BN(amount * 10 ** unpMintInfo.decimals), beneficiary, new anchor.BN(interval), id).accounts({ signer: provider.publicKey, tokenMint: tokenMint, tokenProgram: mintInfo.owner }).rpc({ skipPreflight: true });
     },
-    onError: async (e) => {
+    onError: async () => {
       toast.error("Failed To Create Escrow")
     },
     onSuccess: async () => {
@@ -160,7 +160,7 @@ export function useMutationFucntions() {
         escrow: pda
       }).rpc({ skipPreflight: true })
     },
-    onError: async (e) => {
+    onError: async () => {
       toast.error("Failed To Claim Tokens")
     },
     onSuccess: async () => {
@@ -185,7 +185,7 @@ export function useMutationFucntions() {
         escrow: pda
       }).rpc({ skipPreflight: true })
     },
-    onError: async (e) => {
+    onError: async () => {
       await queryClient.invalidateQueries({ queryKey: ['escrowsforuser', 'all', { network: cluster.network }] })
       toast.error("Failed to Claim Tokens")
     },

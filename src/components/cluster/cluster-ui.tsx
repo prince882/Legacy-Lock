@@ -6,7 +6,6 @@ import { useCluster } from './cluster-data-access'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { AppAlert } from '@/components/app-alert'
-import { toast } from 'sonner'
 
 export function ExplorerLink({ path, label, className }: { path: string; label: string; className?: string }) {
   const { getExplorerUrl } = useCluster()

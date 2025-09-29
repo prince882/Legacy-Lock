@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from "motion/react"
-import { Plus, Shield, Zap, TrendingUp, Users } from 'lucide-react';
+import { Plus, Shield, Zap,  Users } from 'lucide-react';
 import EscrowCard from './create-extras/EscrowCard';
 import EmptyState from './create-extras/EmphtyState';
 import EscrowPopup from './create-extras/CreateEscrowModal';

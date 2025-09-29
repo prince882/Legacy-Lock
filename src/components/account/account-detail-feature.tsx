@@ -1,7 +1,7 @@
 import { PublicKey } from '@solana/web3.js'
 import { useMemo } from 'react'
 import { ExplorerLink } from '../cluster/cluster-ui'
-import { AccountBalance, AccountButtons, AccountTokens, AccountTransactions } from './account-ui'
+import { AccountBalance, AccountButtons, AccountTokens } from './account-ui'
 import { AppHero } from '../app-hero'
 import { ellipsify } from '@/lib/utils'
 import { useParams } from 'react-router'
