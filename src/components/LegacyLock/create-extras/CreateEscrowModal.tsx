@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Zap, Coins, Send, Users, Check } from 'lucide-react';
+import { X, Zap, Coins, Send, Users, } from 'lucide-react';
 import NeonButton from '@/components/ui/Escrow/NeonButton';
 import { useMutationFucntions } from '../program-data-access';
 import { PublicKey } from '@solana/web3.js';
@@ -228,8 +228,8 @@ const EscrowPopup: React.FC<EscrowPopupProps> = ({ isOpen, onClose }) => {
               SetTimeType('year')
             }}>Year</NeonButton>
             <div className="space-y-2">
-              <label className="text-xs font-medium text-pink-300 uppercase tracking-wide">
-                Enter  Id For The Escrow
+              <label className="text-md font-medium text-pink-300   tracking-wide">
+                Enter Id For The Escrow - Unique Identifier (A Random Number) For Each Escrow 
               </label>
               <input
                 type="number"
