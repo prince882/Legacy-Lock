@@ -2,7 +2,7 @@ import { ThemeProvider } from './theme-provider'
 import { Toaster } from './ui/sonner'
 import { AppHeader } from '@/components/app-header'
 import React from 'react'
-import { ClusterChecker, WalletChecker } from '@/components/cluster/cluster-ui'
+import { ClusterChecker,  } from '@/components/cluster/cluster-ui'
 import { AccountChecker } from '@/components/account/account-ui'
 import { BackgroundEffect } from './ts-particles/bg-effect'
 // import { GlobalLoadingIndicator } from './LegacyLock/isFetching'
@@ -22,9 +22,7 @@ export function AppLayout({
           <ClusterChecker>
             <AccountChecker />
           </ClusterChecker>
-          <WalletChecker>
             {children}
-          </WalletChecker>
         </main>
       </div>
       <Toaster />
