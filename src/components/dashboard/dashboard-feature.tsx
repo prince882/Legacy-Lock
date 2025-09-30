@@ -1,6 +1,5 @@
-import { Shield, Users, Clock, ArrowRight, Zap, Wallet } from 'lucide-react'
+import { Shield, Users, Clock, ArrowRight, Zap  } from 'lucide-react'
 import { Link } from 'react-router'
-import { WalletChecker } from '../cluster/cluster-ui'
 
 export default function DashboardFeature() {
   return (
@@ -105,7 +104,6 @@ export default function DashboardFeature() {
               </Link>
             </div>
           </section>
-
           {/* Footer */}
           <footer className="px-6 py-12 border-t border-gray-800/50">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
