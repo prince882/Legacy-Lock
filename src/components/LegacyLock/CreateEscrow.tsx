@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from "motion/react"
-import { Plus, Shield, Zap,  Users } from 'lucide-react';
+import { Plus, Shield, Zap, Users } from 'lucide-react';
 import EscrowCard from './create-extras/EscrowCard';
 import EmptyState from './create-extras/EmphtyState';
 import EscrowPopup from './create-extras/CreateEscrowModal';
@@ -9,6 +9,7 @@ import { BN, ProgramAccount } from '@coral-xyz/anchor';
 import { PublicKey } from '@solana/web3.js';
 import Switch from '@mui/material/Switch';
 import { WalletChecker } from '../cluster/cluster-ui';
+import { useWallet } from '@solana/wallet-adapter-react';
 type Escrow = ProgramAccount<{
   id: number;
   interval: BN;
@@ -22,6 +23,7 @@ type Escrow = ProgramAccount<{
 }>
 // Mock data for demonstration
 function App() {
+  const wallet = useWallet();
   const { data, isLoading } = useEscrows()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [escrows, setEscrows] = useState<Escrow[] | undefined>(data)
@@ -40,7 +42,7 @@ function App() {
       return false
     }
   }
-  if (isLoading) {
+  if (isLoading && wallet.connected) {
     return <div>Loading...</div>
   }
   return (

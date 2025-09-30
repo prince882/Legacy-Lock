@@ -4,6 +4,7 @@ import { PublicKey } from '@solana/web3.js';
 import { useMutationFucntions, useEscrowsForUser } from '../../program-data-access';
 import { formatDuration, formatReadable } from '@/lib/utils';
 import { WalletChecker } from '@/components/cluster/cluster-ui';
+import { useWallet } from '@solana/wallet-adapter-react';
 interface Escrow {
   id: number;                 // Unique identifier
   interval: number;           // In seconds
@@ -18,6 +19,7 @@ interface Escrow {
   isClaimable: boolean;       // Derived state
 }
 function App() {
+  const wallet = useWallet();
   const { claimSolByBeneficiary: { isPending: mutisLoading, mutateAsync: ClaimSol }, claimTokenByBeneficiary: { isPending: tokenIsPending, mutateAsync: ClaimToken } } = useMutationFucntions();
   const { data, isLoading } = useEscrowsForUser()
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
@@ -56,7 +58,7 @@ function App() {
       })()
     }
   }, [data, isLoading])
-  if (isLoading) {
+  if (isLoading && wallet.connected) {
     return <div>Loading...</div>
   }
 
